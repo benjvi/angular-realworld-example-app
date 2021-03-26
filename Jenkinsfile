@@ -24,7 +24,7 @@ pipeline {
                // check i we attached to the correct build and it completed successfully, if not retry
                sh "./scripts/ci/check-latest-image-build.sh || kp image trigger angular demo"
                sh "sleep 5; kp build logs angular-demo; ./scripts/ci/check-latest-image-build.sh"
-               sh "IMG=$(kp image status angular-demo | grep "| awk '{print $2}'); echo $IMG; echo $IMG > img-version"
+               sh "IMG=\$(kp image status angular-demo | grep "| awk '{print \$2}'); echo \$IMG; echo \$IMG > img-version"
            }
         }
         stage('Deploy') {
