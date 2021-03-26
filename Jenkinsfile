@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh "ng test"
+                sh "npm install && ng test"
             }
         }
         stage('Get TBS-built image') {
