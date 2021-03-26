@@ -6,6 +6,7 @@ pipeline {
             agent {
                 docker { 
                    image 'angular/ngcontainer'
+                   args '--entrypoint='
                 }
             }
             steps {
