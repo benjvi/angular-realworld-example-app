@@ -25,7 +25,7 @@ pipeline {
                // build is most likely in-progress, so attachto the logs
                sh "kp build logs angular-demo"
                // check i we attached to the correct build and it completed successfully, if not retry
-               sh "./scripts/ci/check-latest-image-build.sh || kp image trigger angular demo"
+               sh "sleep 3; ./scripts/ci/check-latest-image-build.sh || kp image trigger angular-demo"
                sh "sleep 5; kp build logs angular-demo; ./scripts/ci/check-latest-image-build.sh"
                sh "./scripts/ci/get-latest-image-version.sh"
              }

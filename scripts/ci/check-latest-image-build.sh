@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$( kp build status angular-demo | grep Status | awk '{print $2}')" == "SUCCESS" ]; then
+if [ "$( kp build status angular-demo | grep Status | awk '{print $2}')" != "SUCCESS" ]; then
   echo "TBS image build failed"
   exit 1
 elif [ "$( kp build status angular-demo | grep Revision | awk '{print $2}')" != "$(git rev-parse HEAD)" ]; then
