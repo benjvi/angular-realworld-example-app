@@ -5,11 +5,11 @@ pipeline {
         stage('Test') {
             agent {
                 docker { 
-                   image 'alexsuch/angular-cli'
+                   image 'node:12.7-alpine'
                 }
             }
             steps {
-                sh "npm install && ng test"
+                sh "NODE_ENV=development npm install && ng test"
             }
         }
         stage('Get TBS-built image') {
