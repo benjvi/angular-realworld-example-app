@@ -20,7 +20,7 @@ pipeline {
            }
            steps {
              withCredentials([usernameColonPassword(credentialsId: 'tbs_kubeconfig', variable: 'KUBECONFIG_CONTENT')]) {
-               sh "echo "${KUBECONFIG_CONTENT}" > ~/.kube/config"
+               sh "echo \"${KUBECONFIG_CONTENT}\" > ~/.kube/config"
                // build is most likely in-progress, so attachto the logs
                sh "kp build logs angular-demo"
                // check i we attached to the correct build and it completed successfully, if not retry
