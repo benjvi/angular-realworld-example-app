@@ -10,8 +10,8 @@
     "lint": "ng lint --force",
     "e2e": "ng e2e",
     "postinstall": "./node_modules/@angular/cli/bin/ng build",
-    "prepare": "npm prune --production",
-    "postprepare": "rm -r src && rm *.json"
+    "prepare": "rm -r src",
+    "postprepare": "npm prune --production"
   },
   "pre-commit": [
     "lint"
