@@ -10,7 +10,8 @@ pipeline {
                 }
             }
             steps {
-                sh "NODE_ENV=development npm install && ng test"
+                // should be ng test here, but that requires additional deps in this app's case
+                sh "NODE_ENV=development npm install && ./node_modules/@angular/cli/bin/ng build"
             }
         }
         stage('Get TBS-built image') {
