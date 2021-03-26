@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint --force",
     "e2e": "ng e2e",
-    "postinstall": "ng build"
+    "postinstall": "node_modules/@angular/cli/bin/ng build"
   },
   "pre-commit": [
     "lint"
