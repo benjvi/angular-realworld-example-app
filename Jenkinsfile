@@ -15,11 +15,13 @@ pipeline {
         stage('Get TBS-built image') {
            agent {
                 docker { 
-                   image 'angular/ngcontainer'
+                   image 'benjvi/kp'
                 }
            }
            steps {
-               // build is most likely in-progress, so attach to the logs
+             withCredentials([usernameColonPassword(credentialsId: 'tbs_kubeconfig', variable: 'KUBECONFIG_CONTENT')]) {
+               sh "echo "${KUBECONFIG_CONTENT}" > ~/.kube/config"
+               // build is most likely in-progress, so attachto the logs
                sh "kp build logs angular-demo"
                // check i we attached to the correct build and it completed successfully, if not retry
                sh "./scripts/ci/check-latest-image-build.sh || kp image trigger angular demo"
