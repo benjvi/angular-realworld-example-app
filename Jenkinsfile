@@ -5,8 +5,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker { 
-                   image 'angular/ngcontainer'
-                   args '--entrypoint='
+                   image 'alexsuch/angular-cli'
                 }
             }
             steps {
