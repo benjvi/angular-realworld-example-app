@@ -1,0 +1,21 @@
+apiVersion: kpack.io/v1alpha1
+kind: Image
+metadata:
+  name: angular-demo
+  namespace: my-images
+spec:
+  build:
+    resources: {}
+  builder:
+    # builder has node-> nginx buildpack configured, and docker registry secret configured alongside it
+    kind: Builder
+    name: default
+    namespace: default
+  # has access to docker registry secret in this namespace
+  serviceAccount: default
+  source:
+    git:
+      revision: buildpacks
+      url: https://github.com/benjvi/angular-realworld-example-app
+  tag: benjvi/angular-demo
+status: {}
