@@ -5,6 +5,9 @@ metadata:
   namespace: my-images
 spec:
   build:
+    env:
+    - name: NODE_ENV
+      value: development
     resources: {}
   builder:
     # builder has node-> nginx buildpack configured, and docker registry secret configured alongside it
