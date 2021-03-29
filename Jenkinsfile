@@ -21,7 +21,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh "echo \"from env: ${IMG_VERSION}\""
+                sh "echo \"from env: ${env.IMG_VERSION}\""
                 sh "cat img-version"
             }
         }
