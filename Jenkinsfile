@@ -13,14 +13,16 @@ pipeline {
            }
            steps {
              sh "echo \"test-version-file\" > img-version"
-             IMG_VERSION = sh "echo \"test-version-file\""
+             script {
+               IMG_VERSION = sh "echo \"test-version-file\""
+             }
            }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh "echo \"from env: ${IMG_VERSION}\""
                 sh "cat img-version"
-                sh "echo ${IMG_VERSION}"
             }
         }
     }
