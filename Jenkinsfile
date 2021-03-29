@@ -10,7 +10,7 @@ pipeline {
            steps {
              sh "echo \"test-version-file\" > img-version"
              script {
-               IMG_VERSION = sh "echo \"test-version-file\""
+               IMG_VERSION = sh(script: "echo \"test-version-file\"", returnStdout: true)
              }
              sh "echo \"read: ${IMG_VERSION}\""
            }
