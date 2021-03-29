@@ -14,7 +14,7 @@ pipeline {
            steps {
              sh "echo \"test-version-file\" > img-version"
              script {
-               IMG_VERSION = sh "echo \"test-version-file\""
+               env.IMG_VERSION = sh "echo \"test-version-file\""
              }
            }
         }
