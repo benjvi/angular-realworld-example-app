@@ -36,6 +36,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                git url: 'git@github.com:benjvi/apps-gitops.git'
+                sh "ls apps-gitops"
                 sh "echo ${IMG_VERSION}"
             }
         }
