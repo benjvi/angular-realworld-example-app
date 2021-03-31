@@ -45,10 +45,9 @@ pipeline {
                                              keyFileVariable: 'SSH_KEY_FOR_GITOPS')]) {
                 echo 'Deploying....'
                 sh "cd / && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/apps-gitops.git"
-                sh "echo $SSH_KEY_FOR_GITOPS"
-                sh "ls / && ls /apps-gitops"
-                sh "find ."
-                sh "echo ${IMG_VERSION}"
+                sh "ls /apps-gitops"
+                sh "cp -r k8s/** /apps-gitops/nonprod-cluster/angular-app"
+                sh "cd /apps-gitops/nonprod-cluster && prify run"
               }
             }
         }
