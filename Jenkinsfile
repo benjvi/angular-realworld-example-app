@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        /*stage('Test') {
+        stage('Test') {
             agent {
                 docker { 
                    image 'node:12.7-alpine'
@@ -32,7 +32,7 @@ pipeline {
                } 
              }
            }
-        }*/
+        }
         stage('Deploy') {
             agent {
                 docker { 
@@ -47,7 +47,7 @@ pipeline {
                 sh "cd / && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/apps-gitops.git"
                 sh "ls /apps-gitops"
                 sh "kustomize build k8s/base/ > /apps-gitops/nonprod-cluster/angular-app/ci-package.yml"
-                sh "cd /apps-gitops/nonprod-cluster/angular-app; kustomize create || true; kustomize edit add resource ci-package.yml; kustomize edit set image index.docker.io/benjvi/angular-demo=index.docker.io/benjvi/angular-demo:latest"
+                sh "cd /apps-gitops/nonprod-cluster/angular-app; kustomize create || true; kustomize edit add resource ci-package.yml; kustomize edit set image index.docker.io/benjvi/angular-demo=index.docker.io/benjvi/angular-demo:${IMG_VERSION}"
                 // need some details set in env for prify to work correctly
                 // not all context is kept between sh commands, so use a one liner
                 sh 'cd /apps-gitops/nonprod-cluster && git config user.email "jenkins@localhost" && git config user.name "Jenkins CI Bot - Angular" && GIT_SSH_COMMAND=\'ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no\' prify run'
