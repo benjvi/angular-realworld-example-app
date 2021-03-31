@@ -44,7 +44,7 @@ pipeline {
               withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'ssh-key-for-gitops', \
                                              keyFileVariable: 'SSH_KEY_FOR_GITOPS')]) {
                 echo 'Deploying....'
-                sh "cd / && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes' git clone git@github.com:benjvi/apps-gitops.git"
+                sh "cd / && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/apps-gitops.git"
                 sh "echo $SSH_KEY_FOR_GITOPS"
                 sh "ls / && ls /apps-gitops"
                 sh "find ."
