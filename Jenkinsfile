@@ -41,12 +41,14 @@ pipeline {
                 }
             }
             steps {
+              withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'ssh-key-for-gitops', \
+                                             keyFileVariable: 'SSH_KEY_FOR_GITOPS') {
                 echo 'Deploying....'
-                git url: 'git@github.com:benjvi/apps-gitops.git'
-                sh "cd / && git clone git@github.com:benjvi/apps-gitops.git"
+                sh "cd / && GIT_SSH_COMMAND='ssh -i $}SSH_KEY_FOR_GITOPS} -o IdentitiesOnly=yes' git clone git@github.com:benjvi/apps-gitops.git"
                 sh "ls / && ls /apps-gitops"
                 sh "find ."
                 sh "echo ${IMG_VERSION}"
+              }
             }
         }
     }
