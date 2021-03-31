@@ -48,7 +48,7 @@ pipeline {
                 sh "ls /apps-gitops"
                 sh "cp -r k8s/** /apps-gitops/nonprod-cluster/angular-app"
                 // need some details set in env for prify to work correctly
-                sh 'cd /apps-gitops/nonprod-cluster && git config user.email "jenkins@localhost" && git config user.name "Jenkins CI Bot - Angular" && prify run'
+                sh 'cd /apps-gitops/nonprod-cluster && git config user.email "jenkins@localhost" && git config user.name "Jenkins CI Bot - Angular" && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' prify run'
               }
             }
         }
