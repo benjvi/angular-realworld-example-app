@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker { 
-                   image 'benjvi/kube-deploy-ci'
+                   image 'benjvi/prify'
                    args '-u root:root'
                 }
             }
