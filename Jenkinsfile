@@ -48,8 +48,8 @@ pipeline {
                 sh "ls /apps-gitops"
                 sh "cp -r k8s/** /apps-gitops/nonprod-cluster/angular-app"
                 // need some details set in env for prify to work correctly
-                sh "git config --global user.email "jenkins@localhost"
-                sh "git config --global user.name "Jenkins CI Bot - Angular"
+                sh 'git config --global user.email "jenkins@localhost"'
+                sh 'git config --global user.name "Jenkins CI Bot - Angular"'
                 sh "cd /apps-gitops/nonprod-cluster && prify run"
               }
             }
