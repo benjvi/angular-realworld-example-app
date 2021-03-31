@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
+        /*stage('Test') {
             agent {
                 docker { 
                    image 'node:12.7-alpine'
@@ -32,11 +32,19 @@ pipeline {
                } 
              }
            }
-        }
+        }*/
         stage('Deploy') {
+            agent {
+                docker { 
+                   image 'benjvi:kube-ci"
+                   args '-u root:root'
+                }
+            }
             steps {
                 echo 'Deploying....'
                 git url: 'git@github.com:benjvi/apps-gitops.git'
+                sh "cd / && git clone git@github.com:benjvi/apps-gitops.git"
+                sh "ls / && ls /apps-gitops"
                 sh "find ."
                 sh "echo ${IMG_VERSION}"
             }
