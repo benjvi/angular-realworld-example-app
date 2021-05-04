@@ -26,7 +26,7 @@ pipeline {
                // can get network issues here, continue if we get can error 
                sh "kp build logs angular-demo || true"
                // check i we attached to the correct build and it completed successfully, if not retry
-               sh "sleep 3; ./scripts/ci/check-latest-image-build.sh || kp image trigger angular-demo"
+               sh "sleep 3; ./scripts/ci/check-latest-image-build.sh || kp image trigger angular-demo || true"
                sh "sleep 5; kp build logs angular-demo || true ; ./scripts/ci/check-latest-image-build.sh || true"
                script {
                  IMG_VERSION = sh(script: "./scripts/ci/get-latest-image-version.sh", returnStdout: true)
