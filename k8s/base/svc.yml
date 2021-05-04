@@ -13,6 +13,6 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    run: angular-demo
+    app: angular-demo
   sessionAffinity: None
   type: LoadBalancer
